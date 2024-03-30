@@ -1,10 +1,10 @@
-import React, {useEffect, useState, useMemo} from 'react';
-import axios from 'axios';
-import '../utils/handler';
+import React, {useEffect, useState, useMemo} from "react";
+import axios from "axios";
+import "../utils/handler";
 import {generateSignals, Signal} from "../utils/handler";
-import annotationPlugin from 'chartjs-plugin-annotation';
-import 'chartjs-adapter-date-fns';
-import {Line} from 'react-chartjs-2';
+import annotationPlugin from "chartjs-plugin-annotation";
+import "chartjs-adapter-date-fns";
+import {Line} from "react-chartjs-2";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -16,7 +16,7 @@ import {
     Legend,
     TimeScale,
     LineController
-} from 'chart.js';
+} from "chart.js";
 
 
 ChartJS.register(
@@ -60,8 +60,8 @@ const CandlestickChart: React.FC = () => {
             setSignals(signals);
             setCandlestickData(formattedData);
         } catch (error) {
-            setError('Failed to fetch data');
-            console.error('The request has failed:', error);
+            setError("Failed to fetch data");
+            console.error("The request has failed:", error);
         }
     };
     useEffect(() => {
@@ -102,22 +102,22 @@ const CandlestickChart: React.FC = () => {
     const data = {
         datasets: [
             {
-                label: 'Price',
+                label: "Price",
                 data: formattedCandlestickData,
                 fill: false,
-                borderColor: '#6d996d',
+                borderColor: "#6d996d",
                 tension: 0.1,
                 backgroundColor: formattedCandlestickData.map((point, index) => {
                     if (index > 0) {
                         const previousClose = formattedCandlestickData[index - 1].y;
                         const currentClose = point.y;
                         if (currentClose > previousClose) {
-                            return 'lightgreen'; // Green for bullish
+                            return "lightgreen"; // Green for bullish
                         } else {
-                            return '#FF8488'; // Red for bearish
+                            return "#FF8488"; // Red for bearish
                         }
                     } else {
-                        return 'lightgreen';
+                        return "lightgreen";
                     }
                 }),
             },
@@ -128,13 +128,13 @@ const CandlestickChart: React.FC = () => {
     const options: any = {
         scales: {
             x: {
-                type: 'time',
+                type: "time",
             },
         },
         plugins: {
             title: {
                 display: true,
-                text: 'BTC/USDT Price Movement',
+                text: "BTC/USDT Price Movement",
                 padding: {
                     top: 10,
                     bottom: 10

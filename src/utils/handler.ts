@@ -5,7 +5,7 @@ export interface CandlestickDataPoint {
 }
 
 export interface Signal {
-    type: 'buy' | 'sell';
+    type: "buy" | "sell";
     timestamp: number;
     price: string;
     volume: string;
@@ -32,14 +32,14 @@ export function generateSignals(candlestickData: CandlestickDataPoint[]): Signal
 
         if (currentShortSMA > currentLongSMA && previousShortSMA <= previousLongSMA) {
             signals.push({
-                type: 'buy',
+                type: "buy",
                 timestamp: candlestickData[i].closeTime,
                 price: candlestickData[i].close,
                 volume: candlestickData[i].volume,
             });
         } else if (currentShortSMA < currentLongSMA && previousShortSMA >= previousLongSMA) {
             signals.push({
-                type: 'sell',
+                type: "sell",
                 timestamp: candlestickData[i].closeTime,
                 price: candlestickData[i].close,
                 volume: candlestickData[i].volume,

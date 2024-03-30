@@ -1,14 +1,14 @@
-import { generateSignals, calculateSMA, CandlestickDataPoint, Signal } from './handler';
+import { generateSignals, calculateSMA, CandlestickDataPoint, Signal } from "./handler";
 
-describe('generateSignals function', () => {
-    it('should generate signals', () => {
+describe("generateSignals function", () => {
+    it("should generate signals", () => {
         const candlestickData: CandlestickDataPoint[] = [];
         // Prices gradually decrease
         for (let i = 1; i <= 120; i++) {
             candlestickData.push({
                 closeTime: i,
                 close: (1 / i).toString(),
-                volume: '100',
+                volume: "100",
             });
         }
 
@@ -17,7 +17,7 @@ describe('generateSignals function', () => {
             candlestickData.push({
                 closeTime: i,
                 close: (i * 100).toString(),
-                volume: '100',
+                volume: "100",
             });
         }
 
@@ -26,12 +26,12 @@ describe('generateSignals function', () => {
     });
 })
 
-describe('calculateSMA', () => {
-    it('should calculate SMA correctly for a given period', () => {
+describe("calculateSMA", () => {
+    it("should calculate SMA correctly for a given period", () => {
         const candlestickData: CandlestickDataPoint[] = [
-            { closeTime: 1, close: '10', volume: '100' },
-            { closeTime: 2, close: '15', volume: '150' },
-            { closeTime: 3, close: '20', volume: '200' },
+            { closeTime: 1, close: "10", volume: "100" },
+            { closeTime: 2, close: "15", volume: "150" },
+            { closeTime: 3, close: "20", volume: "200" },
         ];
         const period = 3;
         const expectedSMAValues = [(10 + 15 + 20) / 3]; // Expected SMA value for period of 3

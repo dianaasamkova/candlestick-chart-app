@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import CandlestickChart from "./components/Chart";
 
 function App() {
