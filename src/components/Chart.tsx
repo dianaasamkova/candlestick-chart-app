@@ -146,7 +146,7 @@ const CandlestickChart: React.FC = () => {
         }
     };
     return (
-        <div>
+        <div style={{padding: 20}}>
             {error ? (
                 <div>Error: {error}</div>
             ) : (
