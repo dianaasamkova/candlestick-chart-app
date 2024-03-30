@@ -1,9 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
+import CandlestickChart from './components/Chart';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock('./components/Chart', () => jest.fn(() => "Chart"));
+
+describe('App', () => {
+  it('renders App component without crashin and CandlestickChart component', () => {
+    render(<App />);
+    expect(CandlestickChart).toHaveBeenCalledTimes(1);
+  });
 });
