@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useMemo} from "react";
 import axios from "axios";
-import "../utils/handler";
-import {generateSignals, Signal} from "../utils/handler";
+import {generateSignals, Signal} from "../../utils/handler";
 import annotationPlugin from "chartjs-plugin-annotation";
 import "chartjs-adapter-date-fns";
 import {Line} from "react-chartjs-2";

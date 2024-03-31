@@ -1,34 +1,20 @@
-# Candlestick Chart App
+# Repository Overview
 
-## Overview
-The Candlestick Chart App is a web application built using React and Chart.js. It allows users to visualize historical price movements of the BTC/USDT trading pair and generates buy/sell signals based on a simple moving average (SMA) crossover strategy.
+This repository contains two applications designed to enhance your trading experience and showcase the utilization of published packages.
 
-## Features
-- Fetches candlestick data from the Binance API.
-- Calculates short-term and long-term SMAs.
-- Generates buy and sell signals based on SMA crossovers.
-- Displays candlestick chart with buy/sell annotations using Chart.js.
+## Candlestick Chart App (Folder: lib)
 
-## Files
-- `CandlestickChart.tsx`: React component responsible for fetching data, generating signals, and rendering the candlestick chart.
-- `handler.ts`: Contains functions to generate signals and calculate SMAs.
+The Candlestick Chart App is a robust web application tailored to provide users with comprehensive insights into historical price movements for the BTC/USDT trading pair.
 
-## Installation
-1. Clone the repository:
-   ```
-   git clone https://github.com/dianaasamkova/candlestick-chart-app.git
-2. Navigate to the project directory:
-   ```
-   cd candlestick-chart-app 
-3. Install dependencies:
-### `yarn install`
-4. Start the development server:
-### `yarn start`
-5. To run tests:
-### `yarn test`
+### Features
+- **Visualization**: Utilizes candlestick charts to illustrate historical price movements, empowering users to identify patterns and trends effectively.
+- **Signal Generation**: Implements sophisticated algorithms to generate buy/sell signals based on a simple moving average (SMA) crossover strategy, aiding traders in decision-making.
+- **Real-time Data**: Fetches candlestick data from the Binance API, ensuring users have access to up-to-date and reliable market information.
+- **Interactive Interface**: Provides an intuitive user interface with interactive elements for seamless navigation and analysis.
 
-## Screenshots 
-### Application overview
-![img.png](src/assets/img.png)
+## Usage Example App (Folder: app)
 
+The Usage Example App serves as a demonstration of how to leverage the functionalities of the published packages within this repository. By showcasing practical implementations, this app aims to assist developers in effectively integrating the provided tools into their projects.
 
+### Features
+- **Package Integration**: Demonstrates how to incorporate the functionalities of the Candlestick Chart App and other published packages into your own projects.
