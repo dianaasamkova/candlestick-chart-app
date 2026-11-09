@@ -23,11 +23,17 @@ export function generateSignals(candlestickData: CandlestickDataPoint[]): Signal
     const longSMA: number[] = calculateSMA(candlestickData, longPeriod);
 
 
+    // calculateSMA returns one value per complete window: sma[k] is the average of the window ending at candle
+    // k + period - 1. Shift by that offset so both averages describe the same candle i.
+    const shortAt = (i: number): number => shortSMA[i - (shortPeriod - 1)];
+    const longAt = (i: number): number => longSMA[i - (longPeriod - 1)];
+
+    // Start at the second candle that has a long SMA, so the previous candle has one too.
     for (let i = longPeriod; i < candlestickData.length; i++) {
-        const currentShortSMA: number = shortSMA[i];
-        const currentLongSMA: number = longSMA[i];
-        const previousShortSMA: number = shortSMA[i - 1];
-        const previousLongSMA: number = longSMA[i - 1];
+        const currentShortSMA: number = shortAt(i);
+        const currentLongSMA: number = longAt(i);
+        const previousShortSMA: number = shortAt(i - 1);
+        const previousLongSMA: number = longAt(i - 1);
 
 
         if (currentShortSMA > currentLongSMA && previousShortSMA <= previousLongSMA) {
