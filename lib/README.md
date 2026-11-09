@@ -1,16 +1,31 @@
-# Candlestick Chart App
+# candlestick-app-chart
 
-## Overview
-The Candlestick Chart App is a web application built using React and Chart.js. It allows users to visualize historical price movements of the BTC/USDT trading pair and generates buy/sell signals based on a simple moving average (SMA) crossover strategy.
+React component that charts BTC/USDT hourly prices for the last 30 days (from the Binance public API) and marks buy/sell signals where SMA(20) crosses SMA(60).
 
-## Features
-- Fetches candlestick data from the Binance API.
-- Calculates short-term and long-term SMAs.
-- Generates buy and sell signals based on SMA crossovers.
-- Displays candlestick chart with buy/sell annotations using Chart.js.
+## Install
 
-## Files
-- `CandlestickChart.tsx`: React component responsible for fetching data, generating signals, and rendering the candlestick chart.
-- `handler.ts`: Contains functions to generate signals and calculate SMAs.
+```bash
+npm install candlestick-app-chart
+```
 
+Peer dependencies: `react` and `react-dom` ≥ 17.
 
+## Usage
+
+```tsx
+import { CandlestickChart } from "candlestick-app-chart";
+
+export default function Page() {
+  return <CandlestickChart />;
+}
+```
+
+## Development
+
+```bash
+yarn install
+yarn test --watchAll=false   # unit tests for SMA and signal generation
+yarn build                   # Rollup → dist/cjs, dist/esm, dist/types.d.ts
+```
+
+See the [repository README](https://github.com/dianaasamkova/candlestick-chart-app) and [TECH.md](https://github.com/dianaasamkova/candlestick-chart-app/blob/master/TECH.md) for design notes.

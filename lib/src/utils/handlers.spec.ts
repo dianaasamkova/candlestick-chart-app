@@ -39,3 +39,27 @@ describe("calculateSMA", () => {
         expect(actualSMAValues).toEqual(expectedSMAValues);
     });
 });
+
+describe("generateSignals: crossover timing", () => {
+    // Flat at 100, then a step up to 200 at index 80.
+    // Hand-checked at index 80: SMA20 = (19*100 + 200)/20 = 105 > SMA60 = (59*100 + 200)/60 ≈ 101.7,
+    // and at index 79 both are 100, so the crossover (a buy) happens exactly at index 80.
+    const series: CandlestickDataPoint[] = Array.from({length: 160}, (_, i) => ({
+        closeTime: i,
+        close: String(i < 80 ? 100 : 200),
+        volume: "1",
+    }));
+
+    it("emits a single buy on the candle where the short SMA crosses above the long SMA", () => {
+        expect(generateSignals(series)).toEqual([{type: "buy", timestamp: 80, price: "200", volume: "1"}]);
+    });
+
+    it("emits a sell on the candle where the short SMA crosses below the long SMA", () => {
+        const down = series.map((point) => ({...point, close: point.close === "200" ? "50" : "100"}));
+        expect(generateSignals(down)).toEqual([{type: "sell", timestamp: 80, price: "50", volume: "1"}]);
+    });
+
+    it("emits nothing when there is not enough data for the long SMA", () => {
+        expect(generateSignals(series.slice(0, 59))).toEqual([]);
+    });
+});
