@@ -1,20 +1,39 @@
-# Repository Overview
+# BTC/USDT Price Chart with SMA Signals
 
-This repository contains two applications designed to enhance your trading experience and showcase the utilization of published packages.
+A React chart of the last 30 days of BTC/USDT prices from the public Binance API, with buy and sell markers where a 20-hour and a 60-hour simple moving average cross. The chart is published as a small npm package and used by a separate example app.
 
-## Candlestick Chart App (Folder: lib)
+> **Context:** a weekend project from March 2024, kept as written. It's here as an example of earlier work; my current projects are [FlagPilot](https://github.com/dianaasamkova/flagpilot), [File Tree Explorer](https://github.com/dianaasamkova/file-tree-explorer) and [Realtime Todos](https://github.com/dianaasamkova/realtime-todos).
 
-The Candlestick Chart App is a robust web application tailored to provide users with comprehensive insights into historical price movements for the BTC/USDT trading pair.
+## What's in it
 
-### Features
-- **Visualization**: Utilizes candlestick charts to illustrate historical price movements, empowering users to identify patterns and trends effectively.
-- **Signal Generation**: Implements sophisticated algorithms to generate buy/sell signals based on a simple moving average (SMA) crossover strategy, aiding traders in decision-making.
-- **Real-time Data**: Fetches candlestick data from the Binance API, ensuring users have access to up-to-date and reliable market information.
-- **Interactive Interface**: Provides an intuitive user interface with interactive elements for seamless navigation and analysis.
+- **`lib/`**: the chart component, published to npm as [`candlestick-app-chart`](https://www.npmjs.com/package/candlestick-app-chart). Rollup builds CommonJS, ES module and type definitions, with React as a peer dependency.
+- **`app/`**: a Create React App that installs the package and renders the chart.
+- **Signals** (`lib/src/utils/handler.ts`): simple moving averages over closing prices and a crossover check, with Jest tests.
+- **Rendering:** Chart.js through react-chartjs-2, a time axis, and arrows drawn with the annotation plugin.
 
-## Usage Example App (Folder: app)
+## Tech stack
 
-The Usage Example App serves as a demonstration of how to leverage the functionalities of the published packages within this repository. By showcasing practical implementations, this app aims to assist developers in effectively integrating the provided tools into their projects.
+React 18 · TypeScript · Chart.js 4 · chartjs-plugin-annotation · axios · Rollup · Create React App · Jest
 
-### Features
-- **Package Integration**: Demonstrates how to incorporate the functionalities of the Candlestick Chart App and other published packages into your own projects.
+## Run it
+
+```bash
+cd app
+yarn install
+yarn start
+```
+
+To build the package:
+
+```bash
+cd lib
+npm install
+npm run build:npm
+```
+
+## What I'd do differently today
+
+- **Align the averages with the candles.** `calculateSMA` returns a shorter array that starts at index `period - 1`, while the crossover loop reads it by candle index, so the markers land at the wrong times.
+- **Draw real candlesticks.** It plots closing prices as a line; an OHLC chart would match the name.
+- **Handle the request properly:** a loading state, cancelling on unmount, and typed API data instead of `any`.
+- **Test the crossover itself,** with a fixture where the expected signals are known, not only that some signals appear.
